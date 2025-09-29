@@ -105,123 +105,225 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+Create a table named Tasks with the following columns:
+
+TaskID as INTEGER
+
+TaskName as TEXT
+
+DueDate as DATE
 
 ```sql
--- Paste your SQL code below for Question 1
+create table Tasks(
+    TaskID INTEGER,
+    TaskName TEXT,
+    DueDate DATE
+);
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1328" height="295" alt="image" src="https://github.com/user-attachments/assets/ffdef3b2-e8b5-4cd2-bac7-95096d02a401" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+Create a new table named item with the following specifications and constraints:
+
+item_id as TEXT and as primary key.
+
+item_desc as TEXT.
+
+rate as INTEGER.
+
+icom_id as TEXT with a length of 4.
+
+icom_id is a foreign key referencing com_id in the company table.
+
+The foreign key should cascade updates and deletes.
+
+item_desc and rate should not accept NULL.
 
 ```sql
--- Paste your SQL code below for Question 2
+create table item(
+    item_id TEXT PRIMARY KEY,
+    item_desc TEXT NOT NULL,
+    rate INTEGER NOT NULL,
+    icom_id TEXT(4),
+    
+    FOREIGN KEY (icom_id) REFERENCES company(com_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
 ```
 
 **Output:**
 
-![Output2](output.png)
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+Create a table named Invoices with the following constraints:
+
+InvoiceID as INTEGER should be the primary key.
+
+InvoiceDate as DATE.
+
+Amount as REAL should be greater than 0.
+
+DueDate as DATE should be greater than the InvoiceDate.
+
+OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
 
 ```sql
--- Paste your SQL code below for Question 3
+create table Invoices(
+      InvoiceID integer primary key,
+      InvoiceDate Date,
+      Amount real not null check (Amount>0),
+      DueDate Date not null check (DueDate>InvoiceDate),
+      OrderID integer,
+      
+      foreign key (OrderId) references Orders(OrderID)
+);
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1305" height="160" alt="image" src="https://github.com/user-attachments/assets/4e10226a-b846-427b-9538-fb5a38d89633" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+create a table named jobs including columns job_id, job_title, min_salary and max_salary, and make sure that, the default value for job_title is blank and min_salary is 8000 and max_salary is NULL will be entered automatically at the time of insertion if no value assigned for the specified columns.
 
 ```sql
--- Paste your SQL code below for Question 4
+create table jobs(
+     job_id int primary key,
+     job_title varchar(255) default '',
+     min_salary int default 8000,
+     max_salary int default null
+);
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1135" height="140" alt="image" src="https://github.com/user-attachments/assets/1937dff1-5ce8-4723-8e74-4afda1358a1f" />
 
 **Question 5**
 ---
--- Paste Question 5 here
+In the Employee table, insert a record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
+
+| EmployeeID | Name          | Position    | Department | Salary |
+|------------|---------------|-------------|------------|--------|
+| 5          | George Clark  | Consultant  | NULL       | NULL   |
+| 7          | Noah Davis    | Manager     | HR         | 60000  |
+| 8          | Ava Miller    | Consultant  | IT         | NULL   |
+
 
 ```sql
--- Paste your SQL code below for Question 5
+insert into Employee (EmployeeID,Name,Position,Department,Salary)
+values (5,'George Clark','Consultant',NULL,NULL);
+
+insert into Employee (EmployeeID,Name,Position,Department,Salary)
+values (7,'Noah Davis','Manager','HR',60000);
+
+insert into Employee (EmployeeID,Name,Position,Department,Salary)
+values (8,'Ava Miller','Consultant','IT',NULL); 
 ```
 
 **Output:**
+<img width="1303" height="227" alt="image" src="https://github.com/user-attachments/assets/6adb7569-35a5-4608-801d-61065aabd1fb" />
 
-![Output5](output.png)
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+Write an SQL query to add two new columns, designation and net_salary, to the table Companies. The designation column should have a data type of varchar(50), and the net_salary column should have a data type of number.
 
 ```sql
--- Paste your SQL code below for Question 6
+ALTER TABLE Companies 
+ADD COLUMN designation varchar(50);
+
+ALTER TABLE Companies
+ADD COLUMN net_salary number;
 ```
 
 **Output:**
+<img width="1298" height="355" alt="Screenshot 2025-09-29 134620" src="https://github.com/user-attachments/assets/a7c90b6a-cace-4e5a-ab38-54498306ad2a" />
 
-![Output6](output.png)
 
 **Question 7**
 ---
--- Paste Question 7 here
+Write a SQL Query to add an attribute designation in the employee table with the data type VARCHAR(50).
 
 ```sql
--- Paste your SQL code below for Question 7
+ALTER TABLE employee add column designation varchar(50);
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="1297" height="311" alt="image" src="https://github.com/user-attachments/assets/c412fc20-4e83-47d9-b431-8652a750c876" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+Insert a customer with CustomerID 301, Name Michael Jordan, Address 123 Maple St, City Chicago, and ZipCode 60616 into the Customers table.
 
 ```sql
--- Paste your SQL code below for Question 8
+insert into Customers (CustomerID, Name, Address, City, Zipcode)
+values(301, 'Michael Jordan', '123 Maple St', 'Chicago',60616);
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1297" height="223" alt="image" src="https://github.com/user-attachments/assets/a1de874b-7257-4e61-a3d9-a2c4c552ae95" />
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+Create a new table named orders with the following specifications:
+
+ord_id as TEXT with a length of 4.
+
+item_id as TEXT.
+
+ord_date as DATE.
+
+ord_qty as INTEGER.
+
+cost as INTEGER.
+
+The primary key is a composite key consisting of item_id and ord_date.
+
+ord_id and item_id should not accept NULL
 
 ```sql
--- Paste your SQL code below for Question 9
+create table orders(
+    ord_id TEXT not null check (length(ord_id)=4),
+    item_id TEXT not null,
+    ord_date DATE,
+    ord_qty INTeger,
+    cost integer,
+    primary key(item_id, ord_date)
+);
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1352" height="325" alt="image" src="https://github.com/user-attachments/assets/6300056f-e2b0-40be-921f-ad1031e15b8e" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+Insert all products from Discontinued_products into Products.
+
+Table attributes are ProductID, ProductName, Price, Stock
 
 ```sql
--- Paste your SQL code below for Question 10
+insert into Products select * from Discontinued_products;
 ```
 
 **Output:**
+<img width="1080" height="302" alt="image" src="https://github.com/user-attachments/assets/ecb5dfb5-ea44-47c8-96ef-f01b9fcbf82f" />
 
-![Output10](output.png)
 
 
 ## RESULT
